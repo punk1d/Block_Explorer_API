@@ -194,6 +194,13 @@ namespace Block_Explorer_API.Models
             return _transaction;
         }
 
+        /// <summary>
+        /// Constructs a Transaction Output and adds it to a speficied Transaction
+        /// </summary>
+        /// <param name="transaction">Transaction to add Output to</param>
+        /// <param name="receiverAddress">Destination address</param>
+        /// <param name="amount">Amount to send</param>
+        /// <returns></returns>
         public Transaction AddTxOut(Transaction transaction, Key receiverAddress, Money amount)
         {
             TxOut txOut = new TxOut
@@ -206,6 +213,12 @@ namespace Block_Explorer_API.Models
             return _transaction;
         }
 
+        /// <summary>
+        /// Adds a message into the Transaction Outputs
+        /// </summary>
+        /// <param name="transaction">Transaction to add the message to</param>
+        /// <param name="txMessage">Message in string format</param>
+        /// <returns></returns>
         public Transaction AddTxMessage(Transaction transaction, string txMessage)
         {
             var bytes = Encoding.UTF8.GetBytes(txMessage);
