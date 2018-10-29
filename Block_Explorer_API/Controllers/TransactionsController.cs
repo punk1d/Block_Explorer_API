@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Web.Http;
 using Block_Explorer_API.Models;
+using Block_Explorer_API.BL;
 using NBitcoin;
 using QBitNinja.Client.Models;
 
@@ -50,17 +51,8 @@ namespace Block_Explorer_API.Controllers
                 tx.FetchGeneralTxInfo(transactionResponse);
                 tx.TxInputs = transactionActions.GetTransactionInputs(transactionResponse);
                 tx.TxOutputs = transactionActions.GetTransactionOutputs(transactionResponse);
-
-                //if(tx == default(Tx))
-                //{
-                //    httpResponse = Request.CreateResponse(HttpStatusCode.OK, "Could not find the " +
-                //        "given Transaction Id. Please double-check the input provided and try again.");
-                //}
-                //else
-                //{
                     var response = tx;
                     httpResponse = Request.CreateResponse(HttpStatusCode.OK, response);
-                //}
             }
             catch
             {

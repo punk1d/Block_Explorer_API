@@ -218,11 +218,10 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Transactions.cs" />
+    <Compile Include="BL\Transactions.cs" />
     <Compile Include="Models\Tx.cs" />
     <Compile Include="Models\TxIns.cs" />
     <Compile Include="Models\TxOuts.cs" />

@@ -7,8 +7,9 @@ using NBitcoin;
 using QBitNinja.Client.Models;
 using QBitNinja.Client;
 using System.Runtime.Serialization;
+using Block_Explorer_API.Models;
 
-namespace Block_Explorer_API.Models
+namespace Block_Explorer_API.BL
 {
     /// <summary>
     /// Transactions class is used to get all information from a given transaction
@@ -231,7 +232,14 @@ namespace Block_Explorer_API.Models
             return _transaction;
         }
 
-
+        /// <summary>
+        /// To calculate the change for the sender Address
+        /// </summary>
+        /// <param name="transaction">Transactionn to Affect</param>
+        /// <param name="txAmount">Total Amount in the transaction</param>
+        /// <param name="minerFee">Mining fee</param>
+        /// <param name="outPointToSpend">Outpoint in NBitcoin format</param>
+        /// <returns></returns>
         public Money CalculateTxChangeAmount(GetTransactionResponse transaction, Money txAmount, Money minerFee, OutPoint outPointToSpend)
         {
             var txInAmount = (Money)transaction.ReceivedCoins[(int)outPointToSpend.N].Amount;
@@ -239,13 +247,24 @@ namespace Block_Explorer_API.Models
             return changeAmount;
         }
 
+        /// <summary>
+        /// Gets the Script Signature for the sender wallet
+        /// </summary>
+        /// <param name="transaction">Prevoius transaction</param>
+        /// <param name="inputIndex">Transaction Input index</param>
+        /// <param name="senderAddress">Private Key of the sender wallet</param>
+        /// <returns></returns>
         public Transaction GetScriptSig(Transaction transaction, uint inputIndex, Key senderAddress)
         {
             transaction.Inputs[inputIndex].ScriptSig = senderAddress.ScriptPubKey;
             _transaction = transaction;
             return _transaction;
         }
-
+        
+        /// <summary>
+        /// Sends a transaction to the Blockchain
+        /// </summary>
+        /// <param name="transaction">Generated transaction</param>
         public void PropagateTransaction(Transaction transaction)
         {
             broadcastResponse = client.Broadcast(transaction).Result;
@@ -261,6 +280,13 @@ namespace Block_Explorer_API.Models
             }
         }
 
+        /// <summary>
+        /// Verifies wallet address ownership by generating a signature
+        /// </summary>
+        /// <param name="message">Encrypted message</param>
+        /// <param name="signature">Signature to verify against</param>
+        /// <param name="address">Address to verify</param>
+        /// <returns></returns>
         public bool VerifySignature(string message, string signature, BitcoinPubKeyAddress address)
         {
             return address.VerifyMessage(message, signature);
