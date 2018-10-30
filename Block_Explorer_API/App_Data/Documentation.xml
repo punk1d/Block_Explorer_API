@@ -504,56 +504,56 @@
             <param name="id">This is the Transaction Id</param>
             <returns></returns>
         </member>
-        <member name="T:Block_Explorer_API.Models.Transactions">
+        <member name="T:Block_Explorer_API.BL.Transactions">
             <summary>
             Transactions class is used to get all information from a given transaction
             Other methods in this class are used to build and propagate transactions
             </summary>
         </member>
-        <member name="F:Block_Explorer_API.Models.Transactions.client">
+        <member name="F:Block_Explorer_API.BL.Transactions.client">
             <summary>
             Client for QBitNinja library
             </summary>
         </member>
-        <member name="F:Block_Explorer_API.Models.Transactions.broadcastResponse">
+        <member name="F:Block_Explorer_API.BL.Transactions.broadcastResponse">
             <summary>
             BroadcastResponse object to propagate transactions
             </summary>
         </member>
-        <member name="P:Block_Explorer_API.Models.Transactions.ReceivedCoins">
+        <member name="P:Block_Explorer_API.BL.Transactions.ReceivedCoins">
             <summary>
             List for Transaction Outputs
             </summary>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.GetTransactionDetails(System.String)">
+        <member name="M:Block_Explorer_API.BL.Transactions.GetTransactionDetails(System.String)">
             <summary>
             Get details for a given transaction in NBitcoin format
             </summary>
             <param name="transaction">Transaction Id to look for</param>
             <returns>Transaction object in NBitcoin format</returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.GetTxResponse(System.String)">
+        <member name="M:Block_Explorer_API.BL.Transactions.GetTxResponse(System.String)">
             <summary>
             Get details for a given transaction in QBitNinja format
             </summary>
             <param name="transaction">Transaction Id to look for</param>
             <returns>Transaction object in QBitNinja format</returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.GetTransactionOutputs(QBitNinja.Client.Models.GetTransactionResponse)">
+        <member name="M:Block_Explorer_API.BL.Transactions.GetTransactionOutputs(QBitNinja.Client.Models.GetTransactionResponse)">
             <summary>
             Get all Transaction Outputs from a specified Transaction
             </summary>
             <param name="transactionResponse">Transaction Object in QBitNinja format</param>
             <returns>List of all Transaction Outputs</returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.GetTransactionInputs(QBitNinja.Client.Models.GetTransactionResponse)">
+        <member name="M:Block_Explorer_API.BL.Transactions.GetTransactionInputs(QBitNinja.Client.Models.GetTransactionResponse)">
             <summary>
             Get a list of all Transaction Inputs of a given Transaction Id
             </summary>
             <param name="transactionResponse">Transaction Object in QBitNinja format</param>
             <returns>List of Transaction Inputs</returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.CreateTxOut(NBitcoin.Transaction,System.Decimal)">
+        <member name="M:Block_Explorer_API.BL.Transactions.CreateTxOut(NBitcoin.Transaction,System.Decimal)">
             <summary>
             Creates Transaction Output
             </summary>
@@ -561,14 +561,14 @@
             <param name="amount">Total amount</param>
             <returns></returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.GetTransactionFee(NBitcoin.Transaction)">
+        <member name="M:Block_Explorer_API.BL.Transactions.GetTransactionFee(NBitcoin.Transaction)">
             <summary>
             Gets Transaction Fee of a given Transaction
             </summary>
             <param name="transaction">Transaction in NBitcoin format</param>
             <returns>Total Fee amount in decimal format</returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.CreateOutpoint(QBitNinja.Client.Models.GetTransactionResponse,NBitcoin.Key)">
+        <member name="M:Block_Explorer_API.BL.Transactions.CreateOutpoint(QBitNinja.Client.Models.GetTransactionResponse,NBitcoin.Key)">
             <summary>
             Creates an Outpoint
             </summary>
@@ -576,20 +576,20 @@
             <param name="privateKey">Private Key of the sender address</param>
             <returns></returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.GetSignature(NBitcoin.Key)">
+        <member name="M:Block_Explorer_API.BL.Transactions.GetSignature(NBitcoin.Key)">
             <summary>
             To get a wallet signature
             </summary>
             <param name="key">Private key of the wallet</param>
             <returns>Returns a signature in string format</returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.CreateTransaction">
+        <member name="M:Block_Explorer_API.BL.Transactions.CreateTransaction">
             <summary>
             Creates a new empty Transaction
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.AddTxIn(NBitcoin.Transaction,NBitcoin.OutPoint)">
+        <member name="M:Block_Explorer_API.BL.Transactions.AddTxIn(NBitcoin.Transaction,NBitcoin.OutPoint)">
             <summary>
             Adds Transaction Inputs for a given transaction
             </summary>
@@ -598,7 +598,7 @@
             <param name="txIn">Outpoint to be added to the Input</param>
             <returns></returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.AddTxOut(NBitcoin.Transaction,NBitcoin.Key,NBitcoin.Money)">
+        <member name="M:Block_Explorer_API.BL.Transactions.AddTxOut(NBitcoin.Transaction,NBitcoin.Key,NBitcoin.Money)">
             <summary>
             Constructs a Transaction Output and adds it to a speficied Transaction
             </summary>
@@ -607,12 +607,46 @@
             <param name="amount">Amount to send</param>
             <returns></returns>
         </member>
-        <member name="M:Block_Explorer_API.Models.Transactions.AddTxMessage(NBitcoin.Transaction,System.String)">
+        <member name="M:Block_Explorer_API.BL.Transactions.AddTxMessage(NBitcoin.Transaction,System.String)">
             <summary>
             Adds a message into the Transaction Outputs
             </summary>
             <param name="transaction">Transaction to add the message to</param>
             <param name="txMessage">Message in string format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Block_Explorer_API.BL.Transactions.CalculateTxChangeAmount(QBitNinja.Client.Models.GetTransactionResponse,NBitcoin.Money,NBitcoin.Money,NBitcoin.OutPoint)">
+            <summary>
+            To calculate the change for the sender Address
+            </summary>
+            <param name="transaction">Transactionn to Affect</param>
+            <param name="txAmount">Total Amount in the transaction</param>
+            <param name="minerFee">Mining fee</param>
+            <param name="outPointToSpend">Outpoint in NBitcoin format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Block_Explorer_API.BL.Transactions.GetScriptSig(NBitcoin.Transaction,System.UInt32,NBitcoin.Key)">
+            <summary>
+            Gets the Script Signature for the sender wallet
+            </summary>
+            <param name="transaction">Prevoius transaction</param>
+            <param name="inputIndex">Transaction Input index</param>
+            <param name="senderAddress">Private Key of the sender wallet</param>
+            <returns></returns>
+        </member>
+        <member name="M:Block_Explorer_API.BL.Transactions.PropagateTransaction(NBitcoin.Transaction)">
+            <summary>
+            Sends a transaction to the Blockchain
+            </summary>
+            <param name="transaction">Generated transaction</param>
+        </member>
+        <member name="M:Block_Explorer_API.BL.Transactions.VerifySignature(System.String,System.String,NBitcoin.BitcoinPubKeyAddress)">
+            <summary>
+            Verifies wallet address ownership by generating a signature
+            </summary>
+            <param name="message">Encrypted message</param>
+            <param name="signature">Signature to verify against</param>
+            <param name="address">Address to verify</param>
             <returns></returns>
         </member>
         <member name="T:Block_Explorer_API.Models.Tx">
@@ -695,6 +729,46 @@
             Gets general information for a given transaction
             </summary>
             <param name="transactionResponse">Object containing the transaction in QBitNinja format</param>
+        </member>
+        <member name="T:Block_Explorer_API.Models.TxIns">
+            <summary>
+            Model for Transaction Inputs inside TX object
+            </summary>
+        </member>
+        <member name="P:Block_Explorer_API.Models.TxIns.SpentCoins">
+            <summary>
+            Total amount of coins in a Transaction
+            </summary>
+        </member>
+        <member name="P:Block_Explorer_API.Models.TxIns.SenderAddress">
+            <summary>
+            Who owns the coins
+            </summary>
+        </member>
+        <member name="M:Block_Explorer_API.Models.TxIns.#ctor">
+            <summary>
+            TXIns constructor class
+            </summary>
+        </member>
+        <member name="T:Block_Explorer_API.Models.TxOuts">
+            <summary>
+            Model for Transaction Outputs inside TX object
+            </summary>
+        </member>
+        <member name="P:Block_Explorer_API.Models.TxOuts.DestinationAddress">
+            <summary>
+            Address who will receive the coins
+            </summary>
+        </member>
+        <member name="P:Block_Explorer_API.Models.TxOuts.Amount">
+            <summary>
+            Amount to be sent
+            </summary>
+        </member>
+        <member name="M:Block_Explorer_API.Models.TxOuts.#ctor">
+            <summary>
+            TXOuts class constructor
+            </summary>
         </member>
     </members>
 </doc>

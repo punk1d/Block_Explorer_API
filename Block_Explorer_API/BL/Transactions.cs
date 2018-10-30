@@ -79,10 +79,12 @@ namespace Block_Explorer_API.BL
             {
                 TxOuts txOut = new TxOuts();
                 var amount = (Money)coin.Amount;
-                var paymentScript = coin.TxOut.ScriptPubKey;
-                var address = paymentScript.GetDestinationAddress(Network.TestNet);
+                var address = coin.TxOut.ScriptPubKey.GetDestinationAddress(Network.TestNet);
                 txOut.Amount = amount.ToString();
-                txOut.DestinationAddress = paymentScript.ToString();
+                if (address == null)
+                    txOut.DestinationAddress = "";
+                else
+                    txOut.DestinationAddress = address.ToString();
                 allOutputs.Add(txOut);
             }
             return allOutputs;
